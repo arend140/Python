@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultado - Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quiz.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-header">
+            <h1>🎉 Quiz Concluído!</h1>
+        </div>
+
+        <div class="resultado-final">
+            <div class="pontuacao-final">
+                <div class="pontuacao-numero">{{ total_corretas }}/{{ total_perguntas }}</div>
+                <div class="pontuacao-percentual">
+                    {{ ((total_corretas / total_perguntas) * 100)|round }}% de acerto
+                </div>
+                <div class="pontuacao-mensagem">
+                    {% set percentual = (total_corretas / total_perguntas) * 100 %}
+                    {% if percentual >= 80 %}
+                        🎉 Excelente!
+                    {% elif percentual >= 60 %}
+                        👍 Bom trabalho!
+                    {% else %}
+                        💪 Continue praticando!
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="detalhes-respostas">
+                <h3>Detalhes das Respostas:</h3>
+                {% for resposta in respostas %}
+                <div class="resposta-item {{ 'correta' if resposta.acertou else 'errada' }}">
+                    <p><strong>Pergunta {{ loop.index }}:</strong> {{ resposta.pergunta }}</p>
+                    <p><strong>Sua resposta:</strong> {{ resposta.resposta_usuario }}</p>
+                    {% if not resposta.acertou %}
+                        <p><strong>Resposta correta:</strong> {{ resposta.resposta_correta }}</p>
+                    {% endif %}
+                    <p class="resultado-individual">
+                        {% if resposta.acertou %}
+                            ✅ Acertou
+                        {% else %}
+                            ❌ Errou
+                        {% endif %}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <form action="/" method="GET">
+                <button type="submit" class="btn-reiniciar">🔄 Jogar Novamente</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

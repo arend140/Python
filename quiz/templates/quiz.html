@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz de Conhecimentos Gerais</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quiz.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-header">
+            <h1>Quiz de Conhecimentos Gerais</h1>
+        </div>
+
+        <div class="progresso-container">
+            <div class="progresso">
+                Pergunta {{ pergunta_numero }} de {{ total_perguntas }}
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: {{ (pergunta_numero / total_perguntas) * 100 }}%"></div>
+            </div>
+        </div>
+
+        <div class="quiz-area">
+            {% if not mostrar_resultado %}
+
+                <div class="pergunta-ativa">
+                    <h3>{{ pergunta.pergunta }}</h3>
+                    <form method="POST" action="/quiz">
+                        <div class="opcoes">
+                            {% for opcao in pergunta.opcoes %}
+                            <label class="botao-opcao">
+                                <input type="radio" name="resposta" value="{{ opcao }}" required>
+                                <span>{{ opcao }}</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="btn-responder">✅ Responder</button>
+                    </form>
+                </div>
+            {% else %}
+
+                <div class="resultado-pergunta">
+                    {% set ultima_resposta = respostas[-1] %}
+                    
+                    <div class="feedback {{ 'correto' if ultima_resposta.acertou else 'errado' }}">
+                        <h4>
+                            {% if ultima_resposta.acertou %}
+                                ✅ Correto!
+                            {% else %}
+                                ❌ Errado!
+                            {% endif %}
+                        </h4>
+                        
+                        <p><strong>Pergunta:</strong> {{ ultima_resposta.pergunta }}</p>
+                        
+                        {% if not ultima_resposta.acertou %}
+                            <p><strong>Você marcou:</strong> {{ ultima_resposta.resposta_usuario }}</p>
+                        {% endif %}
+                        
+                        <p><strong>Resposta correta:</strong> {{ ultima_resposta.resposta_correta }}</p>
+                    </div>
+
+                    <form method="POST" action="/proxima">
+                        <button type="submit" class="btn-proximo">
+                            {% if pergunta_numero < total_perguntas %}
+                                ➡️ Próxima Pergunta
+                            {% else %}
+                                🎯 Ver Resultado Final
+                            {% endif %}
+                        </button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

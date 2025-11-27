@@ -1,0 +1,249 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    min-height: 100vh;
+    padding: 20px;
+    color: #2c3e50;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.quiz-header {
+    background: #2c3e50;
+    color: white;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 4px solid #3498db;
+}
+
+.quiz-header h1 {
+    font-size: 2em;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.quiz-header .subtitle {
+    font-size: 1em;
+    opacity: 0.8;
+}
+
+.progresso-container {
+    background: #ecf0f1;
+    padding: 15px 25px;
+    border-bottom: 1px solid #bdc3c7;
+}
+
+.progresso {
+    font-size: 1em;
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #bdc3c7;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #3498db;
+    transition: width 0.3s ease;
+}
+
+.quiz-area {
+    padding: 30px;
+}
+
+.pergunta-ativa h3 {
+    font-size: 1.3em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.botao-opcao {
+    display: block;
+    padding: 12px 18px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    background: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #2c3e50;
+}
+
+.botao-opcao:hover {
+    border-color: #3498db;
+    background: #f8f9fa;
+}
+
+.botao-opcao input {
+    display: none;
+}
+
+.botao-opcao input:checked + span {
+    font-weight: 600;
+    color: #3498db;
+}
+
+.btn-responder, .btn-proximo, .btn-reiniciar {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    display: block;
+    margin: 20px auto 0;
+    text-align: center;
+}
+
+.btn-responder:hover, .btn-proximo:hover, .btn-reiniciar:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.feedback {
+    padding: 18px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 2px solid;
+}
+
+.feedback.correto {
+    background: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.feedback.errado {
+    background: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+.feedback h4 {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+}
+
+.feedback p {
+    margin: 4px 0;
+    font-size: 0.95em;
+}
+
+.resultado-final {
+    padding: 30px;
+    text-align: center;
+}
+
+.resultado-final h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.pontuacao-final {
+    margin: 20px 0;
+}
+
+.pontuacao-numero {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #3498db;
+    margin: 15px 0;
+}
+
+.pontuacao-percentual {
+    font-size: 1.3em;
+    color: #7f8c8d;
+    margin-bottom: 8px;
+}
+
+.pontuacao-mensagem {
+    font-size: 1.1em;
+    margin: 15px 0;
+    padding: 12px;
+    border-radius: 6px;
+    background: #ecf0f1;
+    font-weight: 600;
+}
+
+.detalhes-respostas {
+    margin: 25px 0;
+    text-align: left;
+}
+
+.detalhes-respostas h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.resposta-item {
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border-left: 4px solid;
+    background: #f8f9fa;
+}
+
+.resposta-item.correta {
+    background: #d4edda;
+    border-left-color: #28a745;
+}
+
+.resposta-item.errada {
+    background: #f8d7da;
+    border-left-color: #dc3545;
+}
+
+.resposta-item p {
+    margin: 3px 0;
+    font-size: 0.9em;
+}
+
+.resultado-individual {
+    font-weight: 600;
+    margin-top: 5px !important;
+}
+
+.btn-reiniciar {
+    background: #e67e22;
+}
+
+.btn-reiniciar:hover {
+    background: #d35400;
+}
