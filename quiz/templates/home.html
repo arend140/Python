@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quizzes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quiz.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-header">
+            <h1>📚 Listagem de Quizzes</h1>
+        </div>
+
+        <div class="quizzes-grid">
+            {% for quiz_id, quiz in quizzes.items() %}
+            <a href="{{ url_for('selecionar_quiz', quiz_id=quiz_id) }}" class="quiz-card">
+                <div class="quiz-icon">{{ quiz.icon }}</div>
+                <div class="quiz-content">
+                    <h3>{{ quiz.titulo }}</h3>
+                    <p>{{ quiz.descricao }}</p>
+                    <div class="quiz-meta">
+                        <span class="badge">{{ quiz.perguntas|length }} perguntas</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+            
+        </div>
+    </div>
+</body>
+</html>

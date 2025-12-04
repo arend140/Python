@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Quiz de Conhecimentos Gerais</title>
+    <title>{{ quiz.titulo }} - Quiz</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/quiz.css') }}">
 </head>
 <body>
     <div class="container">
         <div class="quiz-header">
-            <h1>Quiz de Conhecimentos Gerais</h1>
+            <div class="quiz-info">
+                <h1>{{ quiz.icon }} {{ quiz.titulo }}</h1>
+                <div class="subtitle">{{ quiz.descricao }}</div>
+            </div>
+            <a href="{{ url_for('voltar') }}" class="btn-voltar">← Voltar para quizzes</a>
         </div>
 
         <div class="progresso-container">
@@ -21,7 +25,6 @@
 
         <div class="quiz-area">
             {% if not mostrar_resultado %}
-
                 <div class="pergunta-ativa">
                     <h3>{{ pergunta.pergunta }}</h3>
                     <form method="POST" action="/quiz">
@@ -33,11 +36,10 @@
                             </label>
                             {% endfor %}
                         </div>
-                        <button type="submit" class="btn-responder">✅ Responder</button>
+                        <button type="submit" class="btn-responder">Responder</button>
                     </form>
                 </div>
             {% else %}
-
                 <div class="resultado-pergunta">
                     {% set ultima_resposta = respostas[-1] %}
                     
@@ -62,9 +64,9 @@
                     <form method="POST" action="/proxima">
                         <button type="submit" class="btn-proximo">
                             {% if pergunta_numero < total_perguntas %}
-                                ➡️ Próxima Pergunta
+                                Próxima Pergunta
                             {% else %}
-                                🎯 Ver Resultado Final
+                                Ver Resultado Final
                             {% endif %}
                         </button>
                     </form>
